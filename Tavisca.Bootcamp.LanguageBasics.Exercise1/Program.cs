@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 {
@@ -19,7 +19,28 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             var result = FindDigit(args).Equals(expected) ? "PASS" : "FAIL";
             Console.WriteLine($"{args} : {result}");
         }
-
+	// To find and replace the digit and then to check whether it is valid or not
+	public static int findMissing(int number,int position, String[] nums)
+        {
+            if(number.ToString().Length!= nums[position].Length)
+					{
+						return -1;
+					}
+					else
+					{
+						int find = nums[position].IndexOf('?');
+						string oldA = number.ToString();
+						char result = oldA[find];
+						String newA = nums[position].Replace('?',result);
+						if(string.Equals(newA,oldA))
+						{
+							return int.Parse(result.ToString());
+						}
+                   	    else
+						return -1;
+					}
+        }
+        
         public static int FindDigit(string equation)
         {
             // Add your code here.
@@ -46,23 +67,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 				{
 					
 					int A=C/B;
-					if(A.ToString().Length!= nums[0].Length)
-					{
-						return -1;
-					}
-					else
-					{
-						int find = nums[0].IndexOf('?');
-						string oldA = A.ToString();
-						char result = oldA[find];
-						String newA = nums[0].Replace('?',result);
-						if(string.Equals(newA,oldA))
-						{
-							return int.Parse(result.ToString());
-						}
-                    else
-						return -1;
-					}
+					return findMissing(A, 0, nums);
 					
 					
 				}
@@ -79,23 +84,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 				else
 				{
 					int B=C/A;
-					if(B.ToString().Length!= nums[1].Length)
-					{
-						return -1;
-					}
-					else
-					{
-						int find = nums[1].IndexOf('?');
-						string oldB = B.ToString();
-						char result = oldB[find];
-						String newB = nums[1].Replace('?',result);
-						if(string.Equals(newB,oldB))
-						{
-							return int.Parse(result.ToString());
-						}
-                    else
-						return -1;
-					}
+					return findMissing(B, 1, nums);
 				}
 				
 			}
@@ -105,28 +94,11 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 				int A = int.Parse(nums[0]);
 				int B = int.Parse(nums[1]);
 				int C=A*B;
-				if(C.ToString().Length!= nums[2].Length)
-					{
-						return -1;
-					}
-				else
-				{
-					int find = nums[2].IndexOf('?');
-						string oldC = C.ToString();
-						char result = oldC[find];
-						String newC = nums[2].Replace('?',result);
-						if(string.Equals(newC,oldC))
-						{
-							return int.Parse(result.ToString());
-						}
-                    else
-						return -1;
-				}
+				return findMissing(C, 2, nums);
 				
 			}
 			else
 				return -1;
-            throw new NotImplementedException();
         }
     }
 }
