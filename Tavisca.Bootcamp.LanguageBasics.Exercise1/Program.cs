@@ -20,7 +20,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             Console.WriteLine($"{args} : {result}");
         }
 	// To find and replace the digit and then to check whether it is valid or not
-	public static int FindMissing(int number,int missingNumber)
+	public static int FindMissing(int number,string missingNumber)
         {
             if(number.ToString().Length!= missingNumber.Length)
 					{
@@ -46,59 +46,44 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             // Add your code here.
             char[]  splitchars = new char[2]{'*','='};
             String[] nums=equation.Split(splitchars);
-            int check=-1;
-            for(int i=0;i<=2;i++)  
-            {
-                if(nums[i].Contains("?"))
-                {
-                    check=i;
-					break;
-                }
-			}
-			if(check==0)
+		
+	    if(nums[0].Contains("?"))
+	    {
+		    int B = int.Parse(nums[1]);
+		    int C = int.Parse(nums[2]);
+		    if(C%B!=0)
+		    {
+			    return -1;
+		    }
+		    else
+		    {
+			    int A=C/B;
+			    return FindMissing(A,nums[0]);
+		    }
+	    }
+		else if(nums[1].Contains("?"))
+		{
+			int A = int.Parse(nums[0]);
+			int C = int.Parse(nums[2]);
+			if(C%A!=0)
 			{
-				int B = int.Parse(nums[1]);
-				int C = int.Parse(nums[2]);
-				if(C%B!=0)
-				{
-					return -1;
-				}
-				else
-				{
-					
-					int A=C/B;
-					return findMissing(A,nums[0]);
-					
-					
-				}
-				
-			}
-			else if(check==1)
-			{
-				int A = int.Parse(nums[0]);
-				int C = int.Parse(nums[2]);
-				if(C%A!=0)
-				{
-					return -1;
-				}
-				else
-				{
-					int B=C/A;
-					return findMissing(B,nums[1]);
-				}
-				
-			}
-			
-			else if(check==2)
-			{
-				int A = int.Parse(nums[0]);
-				int B = int.Parse(nums[1]);
-				int C=A*B;
-				return findMissing(C,nums[2]);
-				
+				return -1;
 			}
 			else
-				return -1;
+			{
+				int B=C/A;
+				return FindMissing(B,nums[1]);
+			}
+		}
+		else if(nums[2].Contains("?"))
+		{
+			int A = int.Parse(nums[0]);
+			int B = int.Parse(nums[1]);
+			int C=A*B;
+			return FindMissing(C,nums[2]);
+		}
+		else
+			return -1;
         }
     }
 }
