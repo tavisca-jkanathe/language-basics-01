@@ -20,7 +20,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             Console.WriteLine($"{args} : {result}");
         }
 	// To find and replace the digit and then to check whether it is valid or not
-	public static int findMissing(int number,int position, String[] nums)
+	public static int FindMissing(int number,int position, String[] nums)
         {
             if(number.ToString().Length!= nums[position].Length)
 					{
