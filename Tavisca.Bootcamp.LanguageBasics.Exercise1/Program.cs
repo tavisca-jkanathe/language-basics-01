@@ -20,18 +20,18 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             Console.WriteLine($"{args} : {result}");
         }
 	// To find and replace the digit and then to check whether it is valid or not
-	public static int FindMissing(int number,int position, String[] nums)
+	public static int FindMissing(int number,int missingNumber)
         {
-            if(number.ToString().Length!= nums[position].Length)
+            if(number.ToString().Length!= missingNumber.Length)
 					{
 						return -1;
 					}
 					else
 					{
-						int find = nums[position].IndexOf('?');
+						int find = missingNumber.IndexOf('?');
 						string oldA = number.ToString();
 						char result = oldA[find];
-						String newA = nums[position].Replace('?',result);
+						String newA = missingNumber.Replace('?',result);
 						if(string.Equals(newA,oldA))
 						{
 							return int.Parse(result.ToString());
@@ -67,7 +67,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 				{
 					
 					int A=C/B;
-					return findMissing(A, 0, nums);
+					return findMissing(A,nums[0]);
 					
 					
 				}
@@ -84,7 +84,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 				else
 				{
 					int B=C/A;
-					return findMissing(B, 1, nums);
+					return findMissing(B,nums[1]);
 				}
 				
 			}
@@ -94,7 +94,7 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 				int A = int.Parse(nums[0]);
 				int B = int.Parse(nums[1]);
 				int C=A*B;
-				return findMissing(C, 2, nums);
+				return findMissing(C,nums[2]);
 				
 			}
 			else
